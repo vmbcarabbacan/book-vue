@@ -18,7 +18,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '@/plugin/forward-set-cookies.js', mode: 'server' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -49,7 +49,7 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/auth', methods: 'post', propertyName: 'token' },
+          login: { url: '/auth', methods: 'post', propertyName: 'token', credentials: 'includes' },
           logout: { url: "/auth/logout", method: "delete" },
           user: { url: '/users/current-user', methods: 'get', propertyName: 'users' }
         },
@@ -64,7 +64,7 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.BASE_URL,
     proxyHeaders: false,
-    credentials: 'includes'
+    credentials: true
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

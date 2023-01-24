@@ -4,9 +4,9 @@ export const state = () => ({
     auth: {
         firstName: '',
         familyName: '',
-        username: '',
+        username: 'vmbcarabbacan',
         email: '',
-        password: '',
+        password: 'M0a3r1k5',
         role: 'User',
         contactNumber: '',
     },

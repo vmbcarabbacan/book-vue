@@ -23,6 +23,13 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <template v-slot:append>
+        <div class="pa-2">
+          <v-btn block @click="logout">
+            Logout
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -35,7 +42,7 @@
       <v-btn icon @click.stop="fixed = !fixed">
         <v-icon>mdi-minus</v-icon>
       </v-btn>
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-toolbar-title>{{ title }} - {{ $auth.user.name }}</v-toolbar-title>
       <v-spacer />
       <!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
@@ -62,8 +69,10 @@
   </v-app>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent, useContext, useRouter } from '@nuxtjs/composition-api'
+
+export default defineComponent({
   name: 'DefaultLayout',
   data() {
     return {
@@ -88,5 +97,19 @@ export default {
       title: 'Vuetify.js',
     }
   },
-}
+
+  setup() {
+    const { $auth } = useContext()
+    const router = useRouter()
+
+    const logout = async() => {
+      await $auth.logout()
+      await router.push('/login')
+    }
+
+    return {
+      logout
+    }
+  }
+})
 </script>
