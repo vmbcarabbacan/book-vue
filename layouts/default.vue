@@ -8,20 +8,24 @@
       app
     >
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
+        <template
+          v-for="(item, i) in nav" 
         >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          <v-list-item
+            :to="item.to"
+            router
+            exact
+            :key="i"
+            v-if="item.access.includes($auth?.user?.role)"
+          >
+              <v-list-item-action>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
+        </template>
       </v-list>
       <template v-slot:append>
         <div class="pa-2">
@@ -71,6 +75,7 @@
 
 <script lang="ts">
 import { defineComponent, useContext, useRouter } from '@nuxtjs/composition-api'
+import nav from '@/utils/nav'
 
 export default defineComponent({
   name: 'DefaultLayout',
@@ -108,6 +113,7 @@ export default defineComponent({
     }
 
     return {
+      nav,
       logout
     }
   }

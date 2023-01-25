@@ -25,6 +25,7 @@ export default {
     '~/components',
     { path: '~/components/modals', extensions: ['vue'] },
     { path: '~/components/forms', extensions: ['vue'] },
+    { path: '~/components/tables', extensions: ['vue'] },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -78,7 +79,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -95,7 +96,7 @@ export default {
 
   // set auth in middle; if not logged in redirect to /login
   router: {
-    middleware: ['auth']
+    middleware: ['auth', 'bearer']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

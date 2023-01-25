@@ -1,4 +1,4 @@
-import storage from '../utils/storage.ts'
+import links from '../utils/links'
 
 export const state = () => ({
     auth: {
@@ -10,15 +10,15 @@ export const state = () => ({
         role: 'User',
         contactNumber: '',
     },
-    user: {}
+    users: {}
 })
 
 export const getters = {
     getAuth(state) {
         return state.auth
     },
-    getUser(state) {
-        return state.user
+    getUsers(state) {
+        return state.users
     }
 }
 
@@ -26,40 +26,29 @@ export const mutations = {
     updateAuth(state, payload) {
         state.auth = payload
     },
-    setUser(state, payload) {
-        state.user = payload
+    SET_USERS(state, payload) {
+        state.users = payload
     }
 }
 
 export const actions = {
     async register(payload) {
         try {
-            const data = await this.$axios.post('/auth/register', payload)
+            const data = await this.$axios.post(links.REGISTRATION, payload)
             return data
         } catch (error) {
             return error.errors
         }
     },
 
-    async login({state, dispatch}, {username, password}) {
-        console.log(username)
+    async USERS({ commit }) {
         try {
-            const { data } = await this.$axios.post('/auth', {username, password})
-            const token = `Bearer ${data.token}`
-            await this.$auth.$storage.setLocalStorage(storage.token, token)
-            await this.$auth.$storage.setCookie(storage.token, token, true)
-            await dispatch('currentUser', token)
-            return data
+            const response = await this.$axios.get(links.USERS)
+            commit('SET_USERS', response.data)
+            return response.data
         } catch (error) {
             return error.errors
         }
-    },
-
-    async currentUser(commit, {token}) {
-        this.$axios.default.headers.common['Authorization'] = token
-        const { data } = await this.$axios.get('/users/current-user')
-        await this.$auth.$storage.setLocalStorage(storage.user, data.user)
-        await commit('setUser', data.user)
     }
 }
 
