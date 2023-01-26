@@ -1,6 +1,6 @@
 <template>
     <div>
-        <auth-forms title="Login" @process="signin" hasLogin />
+        <auth-forms title="Login" hasLogin @process="signin" />
     </div>
 </template>
 
@@ -16,7 +16,7 @@ export default defineComponent({
         const { $auth } = useContext()
 
         const signin = async({username, password}: User) => {
-            const login = await $auth.loginWith('local', {
+            await $auth.loginWith('local', {
                 data: {username, password}
             })
             // console.log(login)
