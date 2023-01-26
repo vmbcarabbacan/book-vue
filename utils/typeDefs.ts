@@ -21,22 +21,6 @@ type UserHeader = {
   width?: string | number
 }
 
-type UserValue = {
-  _id: String
-  active: Boolean
-  addresses?: Array<UserAddress>
-  books?: Array<UserBook>
-  createdAt: String
-  documents?: Array<UserDocument>
-  email: String
-  role: String
-  status: String
-  trips?: Array<UserBook>
-  updatedAt: String
-  userInfo?: UserInfo
-  username: String
-}
-
 type UserAddress = {
   user: String
   country: String
@@ -48,6 +32,17 @@ type UserAddress = {
   coordinates: Array<Number>
 }
 
+type UserHandle = {
+  _id: String
+  active: Boolean
+  createdAt: String
+  email: String
+  role: String
+  status: String
+  updatedAt: String
+  username: String
+}
+
 type UserBook = {
   fromDestination?: Array<Number>
   endDestination?: Array<Number>
@@ -57,8 +52,8 @@ type UserBook = {
   total: Number
   customerRating: Number
   status: String
-  passenger?: UserValue
-  driver?: UserValue
+  passenger?: UserHandle
+  driver?: UserHandle
 }
 
 type UserDocument = {
@@ -77,6 +72,22 @@ type UserInfo = {
     contactNumber: String
     credits: String
     profile: String
+}
+
+type UserValue = {
+  _id: String
+  active: Boolean
+  addresses?: Array<UserAddress>
+  books?: Array<UserBook>
+  createdAt: String
+  documents?: Array<UserDocument>
+  email: String
+  role: String
+  status: String
+  trips?: Array<UserBook>
+  updatedAt: String
+  userInfo?: UserInfo
+  username: String
 }
 
 export { User, UserHeader, UserValue }
