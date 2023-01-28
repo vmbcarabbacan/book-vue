@@ -66,12 +66,12 @@ type UserDocument = {
 }
 
 type UserInfo = {
-    user: String
-    firstName: String
-    familyName: String
-    contactNumber: String
-    credits: String
-    profile: String
+  user: String
+  firstName: String
+  familyName: String
+  contactNumber: String
+  credits: String
+  profile: String
 }
 
 type UserValue = {
@@ -90,4 +90,14 @@ type UserValue = {
   username: String
 }
 
-export { User, UserHeader, UserValue }
+type UserEdit = {
+  title: String
+  label: String
+  value: String
+  value2?: String
+  isEditable: Boolean
+  isClick: Boolean
+  type: String
+}
+
+export { User, UserHeader, UserValue, UserEdit }

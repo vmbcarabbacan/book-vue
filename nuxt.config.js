@@ -23,6 +23,7 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     '~/components',
+    { path: '~/components/cards', extensions: ['vue'] },
     { path: '~/components/modals', extensions: ['vue'] },
     { path: '~/components/forms', extensions: ['vue'] },
     { path: '~/components/tables', extensions: ['vue'] },
@@ -50,14 +51,23 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/auth', methods: 'post', propertyName: 'token', credentials: 'includes' },
-          logout: { url: "/auth/logout", method: "delete" },
-          user: { url: '/users/current-user', methods: 'get', propertyName: 'users' }
+          login: {
+            url: '/auth',
+            methods: 'post',
+            propertyName: 'token',
+            credentials: 'includes',
+          },
+          logout: { url: '/auth/logout', method: 'delete' },
+          user: {
+            url: '/users/current-user',
+            methods: 'get',
+            propertyName: 'users',
+          },
         },
 
-        tokenType: ''
+        tokenType: '',
       },
-    }
+    },
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -65,7 +75,7 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.BASE_URL,
     proxyHeaders: false,
-    credentials: true
+    credentials: true,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -96,15 +106,16 @@ export default {
 
   // set auth in middle; if not logged in redirect to /login
   router: {
-    middleware: ['auth', 'bearer']
+    middleware: ['auth'],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   // , { isDev, isClient }
-  build: { extend (config) {
-    config.node = {
-      fs: 'empty'
-    }
-  
-  }},
+  build: {
+    extend(config) {
+      config.node = {
+        fs: 'empty',
+      }
+    },
+  },
 }

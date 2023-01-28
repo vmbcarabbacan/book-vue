@@ -8,30 +8,26 @@
       app
     >
       <v-list>
-        <template
-          v-for="(item, i) in nav" 
-        >
+        <template v-for="(item, i) in nav">
           <v-list-item
-            :to="item.to"
+            v-if="item.access.includes($auth?.user?.role)"
+            :key="i"
+            :href="item.to"
             router
             exact
-            :key="i"
-            v-if="item.access.includes($auth?.user?.role)"
           >
-              <v-list-item-action>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
         </template>
       </v-list>
-      <template v-slot:append>
+      <template #append>
         <div class="pa-2">
-          <v-btn block @click="logout">
-            Logout
-          </v-btn>
+          <v-btn block @click="logout"> Logout </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -74,48 +70,44 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useContext, useRouter } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  useContext,
+  useRouter,
+  ref,
+} from '@nuxtjs/composition-api'
 import nav from '@/utils/nav'
 
 export default defineComponent({
   name: 'DefaultLayout',
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
-        },
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
-    }
-  },
 
   setup() {
     const { $auth } = useContext()
     const router = useRouter()
+    const clipped = ref(false)
+    const drawer = ref(false)
+    const fixed = ref(false)
+    const miniVariant = ref(false)
+    const right = ref(true)
+    const rightDrawer = ref(false)
+    const title = ref('Vuetify.js')
 
-    const logout = async() => {
+    const logout = async () => {
       await $auth.logout()
       await router.push('/login')
     }
 
     return {
+      clipped,
+      drawer,
+      fixed,
+      miniVariant,
+      right,
+      rightDrawer,
+      title,
       nav,
-      logout
+      logout,
     }
-  }
+  },
 })
 </script>
