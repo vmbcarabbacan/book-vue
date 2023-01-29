@@ -98,6 +98,7 @@ type UserEdit = {
   isEditable: Boolean
   isClick: Boolean
   type: String
+  exclude?: Array<String>
 }
 
 export { User, UserHeader, UserValue, UserEdit }

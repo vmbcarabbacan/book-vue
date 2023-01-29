@@ -20,21 +20,21 @@ import { UserValue } from '@/utils/typeDefs'
 
 export default defineComponent({
   setup() {
-    const title = ref('Admin Details')
+    const title = ref('Driver Details')
 
     const { store } = useContext()
     useMeta(() => ({
-      titleTemplate: 'Admins Page',
+      titleTemplate: 'Drivers Page',
     }))
 
     const header = ref(userHeader)
 
     const users = computed(() => {
-      return store.state.user.users
+      return store.state.user.uUser
     })
 
     const handleClick = (e: UserValue) => {
-      window.location.href = `/admins/edit/${e._id}`
+      window.location.href = `/drivers/edit/${e._id}`
     }
 
     return {
@@ -46,7 +46,7 @@ export default defineComponent({
   },
 
   async fetch() {
-    await this.$store.dispatch('user/USERS')
+    await this.$store.dispatch('user/USER_BY_ROLE', { role: 'Driver' })
   },
 
   head: {},

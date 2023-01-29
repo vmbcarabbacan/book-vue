@@ -4,6 +4,7 @@ const userInfo = [
     label: 'id',
     value: '_id',
     isEditable: false,
+    exclude: [],
   },
   {
     title: 'First Name',
@@ -14,6 +15,7 @@ const userInfo = [
     isClick: false,
     showEdit: false,
     type: 'text',
+    exclude: [],
   },
   {
     title: 'Family Name',
@@ -24,6 +26,7 @@ const userInfo = [
     isClick: false,
     showEdit: false,
     type: 'text',
+    exclude: [],
   },
   {
     title: 'Username',
@@ -31,6 +34,7 @@ const userInfo = [
     value: 'username',
     isEditable: false,
     type: 'text',
+    exclude: [],
   },
   {
     title: 'Email Address',
@@ -38,6 +42,7 @@ const userInfo = [
     value: 'email',
     isEditable: false,
     type: 'text',
+    exclude: [],
   },
   {
     title: 'Phone Number',
@@ -48,6 +53,7 @@ const userInfo = [
     isClick: false,
     showEdit: false,
     type: 'number',
+    exclude: [],
   },
   {
     title: 'Role',
@@ -57,6 +63,7 @@ const userInfo = [
     isClick: false,
     showEdit: false,
     type: 'text',
+    exclude: ['User', 'Driver'],
   },
 ]
 
