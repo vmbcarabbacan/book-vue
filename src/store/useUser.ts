@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', {
     loading: <boolean> false,
     error: <string> '',
     statusCode: <number> 200,
-    token: <string> '',
+    token: <string> window.localStorage.getItem(storage.token) || '',
     current: <UserValue> {},
     admins: <Array<UserValue>> [],
     users: <Array<UserValue>> [],

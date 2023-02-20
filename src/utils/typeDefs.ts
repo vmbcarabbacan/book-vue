@@ -142,6 +142,11 @@ type Role = {
   role: string | 'User' | 'Driver'
 }
 
+type Socket = {
+  path: string
+  id: string
+}
+
 export {
-  User, Login, Id, Role, Error, UserHeader, UserValue, UserEdit, UpdateAccount, UpdateProfile,
+  User, Login, Id, Role, Error, UserHeader, UserValue, UserEdit, UpdateAccount, UpdateProfile, Socket,
 };
