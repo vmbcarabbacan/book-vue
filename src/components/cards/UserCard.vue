@@ -75,7 +75,7 @@ export default defineComponent({
       formData.append('file', data);
       formData.append('id', user.value._id);
 
-      updateUserProfile(formData);
+      await updateUserProfile(formData);
 
     };
 

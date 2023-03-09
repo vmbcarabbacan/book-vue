@@ -10,7 +10,7 @@ class SocketioService {
     socket: any;
 
     path({ path }: Socket) {
-      this.socket = io(process.env.VUE_APP_API_URL, {
+      this.socket = io(process.env.VUE_APP_API_URL_SOCKET, {
         extraHeaders: {
           Authorization: `Bearer ${token.value}`,
         },
@@ -20,7 +20,7 @@ class SocketioService {
     }
 
     byId({ path, id }: Socket) {
-      this.socket = io(process.env.VUE_APP_API_URL, {
+      this.socket = io(process.env.VUE_APP_API_URL_SOCKET, {
         extraHeaders: {
           Authorization: `Bearer ${token.value}`,
         },

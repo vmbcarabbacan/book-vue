@@ -1,21 +1,26 @@
 <template>
   <v-app>
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang='ts'>
+import { defineComponent, onMounted, watchEffect } from 'vue';
+// import { socket } from '@/store';
 
 export default defineComponent({
   name: 'App',
 
-  data() {
-    return {
-      //
-    };
+  setup() {
+    watchEffect(() => {
+      // if (socket) {
+      //   socket.on('receive-data', (data: any) => {
+      //     console.log({ socket_message: data });
+      //   });
+      // }
+    });
   },
 });
 </script>

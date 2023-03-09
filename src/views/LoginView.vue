@@ -1,8 +1,17 @@
 <script lang="ts" setup>
 /* eslint-disable */
 import { useUserStore } from '@/store/useUser';
+import { onMounted } from 'vue';
+// import { socket } from '@/store';
+
 
 const { login } = useUserStore();
+
+onMounted(() => {
+  // socket.on('receive-data', (data) => {
+  //   console.log(data)
+  // })
+})
 </script>
 
 <template>

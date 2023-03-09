@@ -51,10 +51,12 @@
 
 <script lang="ts">
 /* eslint-disable */
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import { useUserStore } from '@/store/useUser';
 import { storeToRefs } from 'pinia';
 import navs from '@/utils/nav';
+// import { socket } from '@/store'
+
 
 export default defineComponent({
   name: 'default-layout',
@@ -66,6 +68,12 @@ export default defineComponent({
     const drawer = ref(false);
     const fixed = ref(false);
     const title = ref('Vuetify.js');
+
+    onMounted(() => {
+      // socket.on('receive-data', (data:any) => {
+      //   console.log({socket_message:data})
+      // })
+    })
 
     return {
       user,

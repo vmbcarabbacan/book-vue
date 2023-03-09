@@ -18,12 +18,16 @@ export default defineComponent({
   setup() {
     const context = getCurrentInstance();
     const user = context?.appContext.config.globalProperties.$user;
+    const socket = context?.appContext.config.globalProperties.$soketio;
     const store = useUserStore();
-    const { current } = storeToRefs(store);
+    let { current } = storeToRefs(store);
     const { account } = useUserStore();
 
     onMounted(async() => {
       await account({ id: user.id() });
+      socket.on('receive-data', (data: any) => {
+        console.log({ data })
+      })
     });
 
     return {

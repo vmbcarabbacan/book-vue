@@ -6,6 +6,7 @@ import storage from '@/utils/storage'
 import ApiService from '@/services/ApiService';
 import router from '@/router';
 import axios from 'axios';
+import { socket } from '@/store';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -31,6 +32,7 @@ export const useUserStore = defineStore('user', {
         window.localStorage.setItem(storage.token, this.token);
         if(this.statusCode === 200) await this.currentUser();
         await router.push({ name: 'home' });
+        socket.emit('login', this.user._id)
         this.reset();
       } catch (err: any) {
         this.setError(err.response, false);
@@ -75,6 +77,7 @@ export const useUserStore = defineStore('user', {
       try {
         const response = await ApiService.put(`${links.USER_UPDATE}/${payload.id}`, payload);
         // this.current = await response.data.user;
+        socket.emit('updated-profile', response.data.user)
         this.reset();
       } catch (err: any) {
         this.setError(err.response, false);

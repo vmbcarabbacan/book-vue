@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 // eslint-disable-next-line
 import { createPinia } from 'pinia';
+// import io from 'socket.io-client';
 import init from '@/core/init';
 import App from './App.vue';
 import router from './router';
@@ -11,6 +12,7 @@ loadFonts();
 const pinia = createPinia();
 
 const app = createApp(App);
+// app.config.globalProperties.$socket = io('http://localhost:3000');
 
 app
   .use(router)
